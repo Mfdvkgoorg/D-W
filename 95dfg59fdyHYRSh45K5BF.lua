@@ -3,7 +3,7 @@
 -- กัน UI รันซ้ำระหว่างโหลด/รันสคริปต์หลัก (ป้องกัน loop หลัง obf)
 if getgenv and getgenv().TB_MAIN_LOADING then return end
 -- สวิตช์ log (เปิด/ปิดได้จากบนสุด)
-local UI_DEBUG_LOG = false  -- เปลี่ยนเป็น true เพื่อเปิด log, false เพื่อปิด
+local UI_DEBUG_LOG = true  -- เปลี่ยนเป็น true เพื่อเปิด log, false เพื่อปิด
 
 -- ตั้งชื่อ GUI และคีย์กันชน (ปรับชื่อได้ตามเวอร์ชัน)
 local GUI_NAME  = "TB_GetKey_UI_Futuristic"
