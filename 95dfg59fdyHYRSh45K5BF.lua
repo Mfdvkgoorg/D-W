@@ -1,4 +1,10 @@
 -- ==========================
+-- กันรันซ้ำตัวเอง (ถ้า obf เรียก loadstring ตัวเดิมซ้ำ ให้ตัดทันที)
+do
+    local g = (getgenv and getgenv()) or _G
+    if g and g.__TB_UI_GK_V6_ONCE then return end
+    if g then g.__TB_UI_GK_V6_ONCE = true end
+end
 -- กันโหลดซ้ำ + เคลียร์ของเก่าก่อนเสมอ (เวอร์ชันนิ่งกับ obf)
 -- กัน UI รันซ้ำระหว่างโหลด/รันสคริปต์หลัก (ป้องกัน loop หลัง obf)
 if getgenv and getgenv().TB_MAIN_LOADING then return end
@@ -581,9 +587,10 @@ local function destroyAll()
     pcall(function()
         if getgenv then
             local gv = getgenv()
-            gv.TB_UI_GETKEY_VER3 = nil  -- เคลียร์ของเก่าเผื่อเหลือ
-            gv.TB_UI_GETKEY_VER5 = nil  -- เคลียร์ guard ปัจจุบัน
-            gv.TB_MAIN_LOADING   = nil  -- ปลดธงกำลังโหลด เพื่อให้ UI เรียกใหม่ได้
+            gv.TB_UI_GETKEY_VER3  = nil
+            gv.TB_UI_GETKEY_VER5  = nil
+            gv.TB_MAIN_LOADING    = nil
+            gv.__TB_UI_GK_V6_ONCE = nil   -- ★ เคลียร์การ์ดกันรันซ้ำตัวเอง
         end
     end)
 end
